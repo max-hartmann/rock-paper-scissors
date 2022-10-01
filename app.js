@@ -1,4 +1,5 @@
 const choices = ["Rock", "Paper", "Scissors"];
+let score = 0;
 
 function getComputerChoice() {
     return choices[Math.floor(Math.random() * choices.length)];
@@ -30,40 +31,6 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
-
-
-function game() {
-    const NUMBER_OF_ROUNDS = 5;
-    let score = 0;
-
-    for (let i = 0; i < NUMBER_OF_ROUNDS; i++) {
-        let playedRound = playRound(getPlayerChoice(), getComputerChoice());
-        
-        console.log(playedRound.result);
-        console.log(playedRound.playerSelection);
-        console.log(playedRound.computerSelection);
-
-        
-
-        if (playedRound.result === "Player wins.") {
-            score++;
-        }   
-
-        console.log(`Current score is ${score}`);   
-        
-    }
-
-    if(score > NUMBER_OF_ROUNDS/2) {
-        console.log("Player wins the game");
-    } else {
-        console.log("Computer wins the game");
-    }
-
-
-
-}
-
-
 function getPlayerChoice() {
     let playerChoice = sanitizeInput(prompt("Enter your choice"));
 
@@ -78,4 +45,20 @@ function sanitizeInput(input) {
     return input.toLowerCase().charAt(0).toUpperCase() + input.toLowerCase().slice(1);
 }
 
-// I should only be in the branch
+const playButtons = document.querySelectorAll(".playButton");
+
+playButtons.forEach(btn => btn.addEventListener('click', (e) => {
+    // console.log(e.target.dataset.choice);
+    let choice = e.target.dataset.choice;
+    displayResults(playRound(choice, getComputerChoice()));
+    
+  })
+);
+
+function displayResults(result) {
+    const roundResult = document.querySelector(".roundResult");
+    roundResult.textContent = result.result;
+    const score = document.querySelector(".score");
+    score.textContent = result.score;
+
+}
