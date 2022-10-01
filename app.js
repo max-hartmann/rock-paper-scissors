@@ -77,3 +77,5 @@ function getPlayerChoice() {
 function sanitizeInput(input) {
     return input.toLowerCase().charAt(0).toUpperCase() + input.toLowerCase().slice(1);
 }
+
+// I should only be in the branch
