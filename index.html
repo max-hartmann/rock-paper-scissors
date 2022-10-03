@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,25 +9,37 @@
     <script src="app.js" defer></script>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    <div class="results">
-        <div class="roundResult">
-            Click button to start
+    <div class="container">
+        <div class="results">
+            <div class="roundResult">
+                Click button to start
+            </div>
+            <div class="scoreContainer">
+                <div class="playerContainer">
+                    <h2>Player score</h2>
+                    <div class="playerScore">
+                        0
+                    </div>
+                </div>
+                <div class="computerContainer">
+                    <h2>Computer score</h2>
+                    <div class="computerScore">
+                        0
+                    </div>
+                </div>
+            </div>
+            <div class="gameResult">
+
+            </div>
         </div>
-        <div class="playerScore">
-            0
+        <div class="choices">
+            <button data-choice="Rock" class="playButton rockButton">🪨</button>
+            <button data-choice="Paper" class="playButton paperButton">📝</button>
+            <button data-choice="Scissors" class="playButton scissorsButton">✂️</button>
         </div>
-        <div class="computerScore">
-            0
-        </div>
-        <div class="gameResult">
-        
-        </div>
-    </div>
-    <div class="choices">
-        <button data-choice="Rock" class="playButton rockButton">🪨</button>
-        <button data-choice="Paper" class="playButton paperButton">📝</button>
-        <button data-choice="Scissors" class="playButton scissorsButton">✂️</button>
     </div>
 </body>
+
 </html>
