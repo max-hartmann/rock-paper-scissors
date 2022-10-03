@@ -1,5 +1,7 @@
 const choices = ["Rock", "Paper", "Scissors"];
-let score = 0;
+let playerScore = 0;
+let computerScore = 0;
+let gameIsActive = true;
 
 function getComputerChoice() {
     return choices[Math.floor(Math.random() * choices.length)];
@@ -48,17 +50,66 @@ function sanitizeInput(input) {
 const playButtons = document.querySelectorAll(".playButton");
 
 playButtons.forEach(btn => btn.addEventListener('click', (e) => {
-    // console.log(e.target.dataset.choice);
-    let choice = e.target.dataset.choice;
-    displayResults(playRound(choice, getComputerChoice()));
-    
-  })
+
+    if (gameIsActive) {
+        // console.log(e.target.dataset.choice);
+        let choice = e.target.dataset.choice;
+        let result = playRound(choice, getComputerChoice());
+
+        if (result.result === "Player wins.") {
+            playerScore++;
+        } else if (result.result === "Computer wins.") {
+            computerScore++;
+        }
+
+        
+
+        if (computerScore === 5 || playerScore === 5) endGame();
+        displayResults(result);
+
+
+    } else {
+        gameIsActive = true;
+        playerScore = 0;
+        computerScore = 0;
+    }
+})
 );
 
 function displayResults(result) {
     const roundResult = document.querySelector(".roundResult");
-    roundResult.textContent = result.result;
-    const score = document.querySelector(".score");
-    score.textContent = result.score;
+    
+    if (result.result === "Player wins.") {
+        roundResult.textContent = `${result.result} ${result.playerSelection} beats ${result.computerSelection} `;
+    } else if (result.result === "Computer wins.") {
+        roundResult.textContent = `${result.result} ${result.computerSelection} beats ${result.playerSelection} `;
+    } else {
+        roundResult.textContent = result.result;
+    }
 
+    const playerScoreDiv = document.querySelector(".playerScore");
+    playerScoreDiv.textContent = playerScore;
+    const computerScoreDiv = document.querySelector(".computerScore");
+    computerScoreDiv.textContent = computerScore;
+    const gameResult = document.querySelector(".gameResult");
+
+    if (gameIsActive) {
+        gameResult.textContent = "";
+    } else {
+        if (playerScore > computerScore) {
+            gameResult.textContent = "Player wins the game!";
+        } else {
+            gameResult.textContent = "Computer wins! Boo!";
+        }
+    }
+    
+}
+
+function endGame() {
+   
+    gameIsActive = false;
+
+  
+
+   
 }
